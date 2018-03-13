@@ -1,4 +1,4 @@
-FROM ubuntu:17.01
+FROM ubuntu:17.10
 
 MAINTAINER  peterpang <10846295@qq.com>
 
