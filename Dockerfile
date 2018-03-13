@@ -40,7 +40,6 @@ RUN apt update \
 	&& phpize \
 	&& ./configure --enable-redis-igbinary \
 	&& make &&  make install \
-    & composer config -g repo.packagist composer https://packagist.phpcomposer.com \
 	&& mkdir -p /var/log/supervisor \
 	&& apt-get autoclean \
     && apt-get autoremove \
