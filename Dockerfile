@@ -1,4 +1,4 @@
-FROM php:7.1-fpm-alpine
+FROM php:7.1-fpm
 
 MAINTAINER  peterpang 10846295@qq.com
 
