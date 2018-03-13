@@ -1,11 +1,14 @@
-FROM ubuntu:xenial
+FROM ubuntu:16.04
 
 MAINTAINER  peterpang <10846295@qq.com>
 
 COPY sshd_config /etc/ssh/
 
-RUN apt-get update && apt -y upgrade && LC_ALL=en_US.UTF-8 add-apt-repository -y ppa:ondrej/php \
-            apt-get update && apt-get -y install \
+RUN apt-get update && apt-get install -y --force-yes \ 
+            wget \
+            curl \
+            zip \
+            unzip \
             zip \
             sudo \
             curl \
@@ -24,39 +27,28 @@ RUN apt-get update && apt -y upgrade && LC_ALL=en_US.UTF-8 add-apt-repository -y
             openssh-server \
             subversion \
             supervisor \
-            software-properties-common \
-            language-pack-en-base \
-            gconf-service \
-            libasound2 \
-            libgtk-3-0 \
-            gconf-service \
-            libasound2 \
-            libgconf-2-4 \
-            libnspr4 \
-            libx11-dev \
-            fonts-liberation \
-            xdg-utils \
-            libnss3 \
-            libxss1 \
-            libappindicator1 \
-            libindicator7 \
             php7.1 \
             php7.1-cli \
             php7.1-json \
             php7.1-curl \
             php7.1-fpm \
             php7.1-gd \
-            php7.1-ldap \
-            php7.1-mbstring \
             php7.1-mysql \
             php7.1-pdo \
             php7.1-soap \
             php7.1-sqlite3 \
-            php7.1-xml \
             php7.1-zip \
             php7.1-dev \
             php7.1-mcrypt \
             php7.1-intl \
+            php7.1-fpm \
+            php7.1-common \
+            php7.1-gd \
+            php7.1-json \
+            php7.1-curl \
+            php7.1-xml \
+            php7.1-intl \
+            php7.1-mbstring \
             && curl -sS https://getcomposer.org/installer | php \
             && mv composer.phar /usr/local/bin/composer \
             && cd /home && rm -rf temp && mkdir temp && cd temp \
