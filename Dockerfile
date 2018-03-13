@@ -5,9 +5,10 @@ MAINTAINER peterpang 10846295@qq.com
 COPY sshd_config /etc/ssh/
 
 RUN  apt-get update && apt-get install -y \
-            curl \
+            software-properties-common \
             sudo \
             sudo add-apt-repository ppa:ondrej/php \
+            curl \
             nodejs \
             npm \
             nginx-full \
@@ -42,6 +43,8 @@ RUN  apt-get update && apt-get install -y \
             php7.1-pdo_mysql \
             php7.1-xml \
             php7.1-dev \
+            php7.1-mcrypt \
+            php7.1-zip \
             && curl -sS https://getcomposer.org/installer | php \
             && mv composer.phar /usr/local/bin/composer \
             && cd /home && rm -rf temp && mkdir temp && cd temp \
