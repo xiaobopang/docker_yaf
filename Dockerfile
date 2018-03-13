@@ -4,8 +4,10 @@ MAINTAINER peterpang 10846295@qq.com
 
 COPY sshd_config /etc/ssh/
 
-RUN   apt-get install python-software-properties && add-apt-repository ppa:ondrej/php \
-            apt-get update && apt-get install -y \
+RUN         apt-get update && \
+            apt-get install -y software-properties-common python-software-properties && \
+            add-apt-repository -y -u ppa:ondrej/php && \
+            apt-get install -y \
             sudo \
             curl \
             nodejs \
