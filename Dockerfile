@@ -43,13 +43,6 @@ RUN apt-get update &&  apt-get install -y \
             && tar -zxvf v3.3.2.tar.gz \
             && cd cphalcon-3.3.2/build \
             && sudo ./install \
-            && pecl install swoole \
-            && echo extension=phalcon.so >> /etc/php/7.1/mods-available/phalcon.ini \
-            && ln -s /etc/php/7.1/mods-available/phalcon.ini /etc/php/7.1/cli/conf.d/phalcon.ini \
-            && ln -s /etc/php/7.1/mods-available/phalcon.ini /etc/php/7.1/fpm/conf.d/phalcon.ini \
-            && echo extension=swoole.so >> /etc/php/7.1/mods-available/swoole.ini \
-            && ln -s /etc/php/7.1/mods-available/swoole.ini /etc/php/7.1/cli/conf.d/swoole.ini \
-            && ln -s /etc/php/7.1/mods-available/swoole.ini /etc/php/7.1/fpm/conf.d/swoole.ini \
             && service php7.1-fpm start \
             && mkdir -p /var/log/supervisor \
             && mkdir /var/run/sshd \
