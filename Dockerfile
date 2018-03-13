@@ -1,26 +1,21 @@
-FROM phpdockerio/php71-fpm:latest
+FROM ubuntu:16.04
 
 MAINTAINER  peterpang 10846295@qq.com
 
 COPY sshd_config /etc/ssh/
 
-RUN  apt-get update && apt-get -y --no-install-recommends install \
-            php7.1-cli \
-            php7.1-common \
-            php7.1-mbstring \
-            php7.1-gd \
-            php7.1-intl \
-            php7.1-xml \
-            php7.1-mysql \
-            php7.1-mcrypt \
-            php7.1-mbstring \
-            php-redis \
-            php7.1-opcache \
-            php7.1-curl \
-            php7.1-json \
-            php7.1-zip \
-            sudo \
+ARG LANG=C.UTF-8
+ARG DEBIAN_FRONTEND=noninteractive
+
+RUN  apt-get update && apt-get -y install software-properties-common && add-apt-repository ppa:ondrej/php && apt-get -y --no-install-recommends install \
+            apt-utils \
             curl \
+            nano \
+            ca-certificates \
+            postfix \
+            netcat \
+            libmcrypt-dev \
+            sudo \
             nodejs \
             npm \
             nginx-full \
@@ -37,6 +32,32 @@ RUN  apt-get update && apt-get -y --no-install-recommends install \
             openssh-server \
             subversion \
             supervisor \
+            apt-get update \
+            apt-get -y install php7.1 \
+            apt-get -y --no-install-recommends install \
+            php7.1-cli \
+            php7.1-common \
+            php7.1-apcu \
+            php7.1-apcu-bc \
+            php7.1-curl \
+            php7.1-json \
+            php7.1-mcrypt \
+            php7.1-opcache \
+            php7.1-readline \
+            php7.1-xml \
+            php7.1-zip \
+            php7.1-fpm \
+            php7.1-redis \
+            php7.1-mongodb \
+            php7.1-mysqli \
+            php7.1-intl \
+            php7.1-gd \
+            php7.1-mbstring \
+            php7.1-soap \
+            php7.1-bcmath \
+            php7.1-curl \
+            php7.1-ldap \
+            php7.1-mcrypt \
             && curl -sS https://getcomposer.org/installer | php \
             && mv composer.phar /usr/local/bin/composer \
             && cd /home && rm -rf temp && mkdir temp && cd temp \
