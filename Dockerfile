@@ -7,6 +7,7 @@ COPY sshd_config /etc/ssh/
 RUN  apt-get update && apt-get install -y \
             curl \
             sudo \
+            sudo add-apt-repository ppa:ondrej/php \
             nodejs \
             npm \
             nginx-full \

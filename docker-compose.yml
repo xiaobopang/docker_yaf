@@ -1,0 +1,12 @@
+version: "2"
+services:
+  # 阿里云内网 registry.cn-hangzhou.aliyuncs.com/peterpang/phalcon
+  # 阿里云公网 registry-internal.cn-hangzhou.aliyuncs.com/peterpang/phalcon
+  peterpang:
+        container_name: peterpang
+        image: registry.cn-hangzhou.aliyuncs.com/peterpang/phalcon
+        volumes:
+            - /home/docker_user/peterpang/www:/var/www/public
+        ports:
+            - "8081:80"
+            - "10122:22"
