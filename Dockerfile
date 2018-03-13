@@ -4,7 +4,7 @@ MAINTAINER  peterpang 10846295@qq.com
 
 COPY sshd_config /etc/ssh/
 
-RUN  apt-get install software-properties-common && add-apt-repository ppa:ondrej/php \
+RUN  apt-get -y install python-software-properties software-properties-common && add-apt-repository ppa:ondrej/php \
             apt-get update && apt-get install -y \
             php7.1 \
             php7.1-fpm \
