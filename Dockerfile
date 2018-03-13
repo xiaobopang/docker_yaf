@@ -1,4 +1,4 @@
-FROM ubuntu:16.04
+FROM devgeniem/ubuntu-docker-openresty-pagespeed
 
 MAINTAINER  peterpang 10846295@qq.com
 
@@ -36,6 +36,7 @@ RUN  apt-get update && apt-get -y install software-properties-common && add-apt-
             apt-get -y install php7.1 \
             apt-get -y --no-install-recommends install \
             php7.1-cli \
+            php7.1-dev \
             php7.1-common \
             php7.1-apcu \
             php7.1-apcu-bc \
