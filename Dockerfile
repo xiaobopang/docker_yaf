@@ -4,8 +4,13 @@ MAINTAINER peterpang 10846295@qq.com
 
 COPY sshd_config /etc/ssh/
 
-RUN  add-apt-repository ppa:ondrej/php && apt-get update && apt install -y –allow-unauthenticated \
-            --no-install-recommends \
+RUN  apt-get update && apt-get install -y --no-install-recommends apt-utils \ 
+		software-properties-common \
+		python-software-properties \
+		language-pack-en-base  \
+	      LC_ALL=en_US.UTF-8 add-apt-repository ppa:ondrej/php  \
+	      apt-get update && apt-get upgrade -y \
+	      apt-get install -y python-setuptools \
             sudo \
             curl \
             nodejs \
