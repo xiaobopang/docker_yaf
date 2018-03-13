@@ -4,18 +4,10 @@ MAINTAINER peterpang 10846295@qq.com
 
 COPY sshd_config /etc/ssh/
 
-RUN   dpkg-divert --local --rename --add /sbin/initctl && \
-      ln -sf /bin/true /sbin/initctl && \
-	mkdir /var/run/sshd && \
-	mkdir /run/php && \
-	apt-get update && \
-	apt-get install -y --no-install-recommends apt-utils \ 
-		software-properties-common \
-		python-software-properties \
-		language-pack-en-base && \
-	LC_ALL=en_US.UTF-8 add-apt-repository ppa:ondrej/php && \
-	apt-get update && apt-get upgrade -y && \
-	apt-get install -y python-setuptools \ 
+RUN   apt-get update && apt-get -y install software-properties-common \
+            add-apt-repository ppa:ondrej/php \
+            apt-get update \
+            apt-get -y --no-install-recommends install \
             php7.1 \
             php7.1-bcmath \
             php7.1-cli \
