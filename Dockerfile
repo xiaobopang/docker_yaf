@@ -5,7 +5,7 @@ MAINTAINER  peterpang <10846295@qq.com>
 COPY sshd_config /etc/ssh/
 
 RUN apt-get update && apt -y upgrade && LC_ALL=en_US.UTF-8 add-apt-repository -y ppa:ondrej/php \
-            apt-get -y install \
+            apt-get update && apt-get -y install \
             zip \
             sudo \
             curl \
