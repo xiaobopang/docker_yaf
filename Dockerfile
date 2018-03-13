@@ -4,13 +4,9 @@ MAINTAINER peterpang 10846295@qq.com
 
 COPY sshd_config /etc/ssh/
 
-RUN  apt-get update && apt-get install -y \
+RUN  apt-get update && add-apt-repository ppa:ondrej/php && apt-get install -y \
+            python-software-properties \
             sudo \
-            software-properties-common \
-            sudo add-apt-repository ppa:ondrej/php \
-            sudo LC_ALL=en_US.UTF-8 add-apt-repository ppa:ondrej/php \
-            sudo apt-get update  \
-            sudo apt-cache search php7.1 \
             curl \
             nodejs \
             npm \
