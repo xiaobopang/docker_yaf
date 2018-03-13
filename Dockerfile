@@ -4,8 +4,9 @@ MAINTAINER  peterpang 10846295@qq.com
 
 COPY sshd_config /etc/ssh/
 
-RUN  apt-get update && apt-get -y install python-software-properties software-properties-common \
-            add-apt-repository ppa:ondrej/php \
+RUN  apt-get update && apt-get install -y curl \
+            curl -sSLo /etc/apt/trusted.gpg.d/sury-php.gpg https://packages.sury.org/php/apt.gpg && \
+            echo "deb https://packages.sury.org/php/ stretch main" > /etc/apt/sources.list.d/php.list \
             apt-get update && apt-get install -y \
             php7.1 \
             php7.1-fpm \
