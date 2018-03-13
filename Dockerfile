@@ -1,34 +1,27 @@
 FROM ubuntu:16.04
 
-MAINTAINER peterpang 10846295@qq.com
+MAINTAINER  peterpang 10846295@qq.com
 
 COPY sshd_config /etc/ssh/
 
-RUN   apt-get update && apt-get -y install software-properties-common \
-            add-apt-repository ppa:ondrej/php \
-            apt-get update \
-            apt-get -y --no-install-recommends install \
+RUN apt-get update && apt-get install -y software-properties-common python-software-properties && LC_ALL=C.UTF-8 add-apt-repository -y ppa:ondrej/php \ 
+            apt-get update && apt-get install -y \
             php7.1 \
-            php7.1-bcmath \
-            php7.1-cli \
-            php7.1-curl \
-            php7.1-common \
             php7.1-fpm \
-            php7.1-gd \
-            php7.1-gmp \
-            php7.1-intl \
-            php7.1-json \
+            php7.1-cli \
+            php7.1-common \
             php7.1-mbstring \
-            php7.1-mcrypt \
-            php7.1-mysqlnd \
-            php7.1-opcache \
-            php7.1-pdo \
-            php7.1-pdo_mysql \
+            php7.1-gd \
+            php7.1-intl \
             php7.1-xml \
-            php7.1-dev \
+            php7.1-mysql \
             php7.1-mcrypt \
+            php7.1-mbstring \
+            php-redis \
+            php7.1-opcache \
+            php7.1-curl \
+            php7.1-json \
             php7.1-zip \
-            php7.1-redis \
             sudo \
             curl \
             nodejs \
