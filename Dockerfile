@@ -4,9 +4,11 @@ MAINTAINER peterpang 10846295@qq.com
 
 COPY sshd_config /etc/ssh/
 
-RUN  apt-get update && apt-get install -y software-properties-common \
-            python-software-properties && LC_ALL=C.UTF-8 add-apt-repository -y ppa:ondrej/php \
-            apt-get update && apt-get install -y \
+RUN  apt-get update -qq && apt-get upgrade -y && \
+            apt-get install -y wget apt-transport-https lsb-release ca-certificates \
+            wget -O /etc/apt/trusted.gpg.d/php.gpg https://packages.sury.org/php/apt.gpg  \
+            echo "deb https://packages.sury.org/php/ $(lsb_release -sc) main" > /etc/apt/sources.list.d/php.list \
+            apt-get update -qq && apt-get install -y \
             php7.1 \
             php7.1-bcmath \
             php7.1-cli \
