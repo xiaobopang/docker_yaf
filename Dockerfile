@@ -4,7 +4,8 @@ MAINTAINER peterpang 10846295@qq.com
 
 COPY sshd_config /etc/ssh/
 
-RUN  add-apt-repository ppa:ondrej/php && apt-get update && apt-get install -y \
+RUN  add-apt-repository -y ppa:ondrej/php && apt-get update && apt install -y –allow-unauthenticated \
+            --no-install-recommends \
             sudo \
             curl \
             nodejs \
@@ -43,6 +44,7 @@ RUN  add-apt-repository ppa:ondrej/php && apt-get update && apt-get install -y \
             php7.1-dev \
             php7.1-mcrypt \
             php7.1-zip \
+            php7.1-redis \
             && curl -sS https://getcomposer.org/installer | php \
             && mv composer.phar /usr/local/bin/composer \
             && cd /home && rm -rf temp && mkdir temp && cd temp \
