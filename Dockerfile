@@ -4,13 +4,13 @@ MAINTAINER peterpang 10846295@qq.com
 
 COPY sshd_config /etc/ssh/
 
-RUN  apt-get update && apt-get install -y --no-install-recommends apt-utils \ 
-		software-properties-common \
-		python-software-properties \
-		language-pack-en-base  \
-	      LC_ALL=en_US.UTF-8 add-apt-repository ppa:ondrej/php  \
-	      apt-get update && apt-get upgrade -y \
-	      apt-get install -y python-setuptools \
+RUN  apt-get update && apt-get install -y \ 
+		apt-transport-https lsb-release ca-certificates \
+            wget \
+            lsb-release \
+            wget -O /etc/apt/trusted.gpg.d/php.gpg https://packages.sury.org/php/apt.gpg; \
+            echo "deb https://packages.sury.org/php/ $(lsb_release -sc) main" > /etc/apt/sources.list.d/php.list;
+RUN  apt-get update && apt-get install -y \
             sudo \
             curl \
             nodejs \
