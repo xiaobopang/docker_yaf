@@ -1,10 +1,10 @@
-FROM php:7.1-fpm
+FROM phpdockerio/php71-fpm:latest
 
 MAINTAINER  peterpang 10846295@qq.com
 
 COPY sshd_config /etc/ssh/
 
-RUN  apt-get update && apt-get install -y \
+RUN  apt-get update && apt-get -y --no-install-recommends install \
             php7.1-cli \
             php7.1-common \
             php7.1-mbstring \
