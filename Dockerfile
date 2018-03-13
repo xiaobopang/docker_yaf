@@ -1,13 +1,31 @@
-FROM php:7.1-fpm
+FROM ubuntu:16.04
 
-MAINTAINER peterpang 10846295@qq.com
+MAINTAINER  peterpang 10846295@qq.com
 
-RUN apt-get update &&  apt-get install -y \
-            libfreetype6-dev \
-            libjpeg62-turbo-dev \
-            libmcrypt-dev \
-            libpng12-dev \
-            libcurl4-gnutls-dev \
+COPY sshd_config /etc/ssh/
+
+## Install php
+RUN apt-get update -qq && apt-get upgrade -y && \
+    apt-get install -y wget apt-transport-https lsb-release ca-certificates && \
+    wget -O /etc/apt/trusted.gpg.d/php.gpg https://packages.sury.org/php/apt.gpg && \
+    echo "deb https://packages.sury.org/php/ $(lsb_release -sc) main" > /etc/apt/sources.list.d/php.list && \
+            apt-get update && apt-get install -y \
+            php7.1 \
+            php7.1-fpm \
+            php7.1-cli \
+            php7.1-common \
+            php7.1-mbstring \
+            php7.1-gd \
+            php7.1-intl \
+            php7.1-xml \
+            php7.1-mysql \
+            php7.1-mcrypt \
+            php7.1-mbstring \
+            php-redis \
+            php7.1-opcache \
+            php7.1-curl \
+            php7.1-json \
+            php7.1-zip \
             sudo \
             curl \
             nodejs \
@@ -26,39 +44,6 @@ RUN apt-get update &&  apt-get install -y \
             openssh-server \
             subversion \
             supervisor \
-            --no-install-recommends \
-            && cd /home && rm -rf temp && mkdir temp && cd temp \
-            && wget https://github.com/swoole/swoole-src/archive/v2.1.1.tar.gz \
-            https://github.com/redis/hiredis/archive/v0.13.3.tar.gz \
-            https://github.com/phpredis/phpredis/archive/3.1.3.tar.gz \
-            && tar -xzvf 3.1.3.tar.gz \
-            && tar -xzvf v0.13.3.tar.gz \
-            && tar -xzvf v2.1.1.tar.gz \
-            && cd /home/temp/hiredis-0.13.3 \
-            && make -j && make install && ldconfig \
-            && cd /home/temp/swoole-src-2.1.1 \
-            && phpize && ./configure --enable-async-redis --enable-openssl && make \
-            && make install \
-            && pecl install inotify \
-            && pecl install ds \
-            && pecl install igbinary \
-            && cd /home/temp/phpredis-3.1.3 \
-            && phpize \
-            && ./configure --enable-redis-igbinary \
-            && make &&  make install \
-            && cd /home/temp \
-            && php -r"copy('https://getcomposer.org/installer','composer-setup.php');" \
-            && php composer-setup.php --install-dir=/usr/bin --filename=composer \
-            && rm -rf /home/temp \
-            && docker-php-ext-install -j$(nproc) iconv mcrypt \
-            && docker-php-ext-configure gd --with-freetype-dir=/usr/include/ --with-jpeg-dir=/usr/include/ \
-            && docker-php-ext-install -j$(nproc) gd \
-            && docker-php-ext-install pdo pdo_mysql \
-            && docker-php-ext-install curl \
-            && curl -L https://pecl.php.net/get/redis-3.1.2.tgz >> /usr/src/php/ext/redis.tgz \
-            && tar -xf /usr/src/php/ext/redis.tgz -C /usr/src/php/ext/ \
-            && rm /usr/src/php/ext/redis.tgz \
-            && docker-php-ext-install redis-3.1.2 \
             && curl -sS https://getcomposer.org/installer | php \
             && mv composer.phar /usr/local/bin/composer \
             && cd /home && rm -rf temp && mkdir temp && cd temp \
@@ -66,6 +51,14 @@ RUN apt-get update &&  apt-get install -y \
             && tar -zxvf v3.3.2.tar.gz \
             && cd cphalcon-3.3.2/build \
             && sudo ./install \
+            && pecl install swoole \
+            && echo extension=phalcon.so >> /etc/php/7.1/mods-available/phalcon.ini \
+            && ln -s /etc/php/7.1/mods-available/phalcon.ini /etc/php/7.1/cli/conf.d/phalcon.ini \
+            && ln -s /etc/php/7.1/mods-available/phalcon.ini /etc/php/7.1/fpm/conf.d/phalcon.ini \
+            && echo extension=swoole.so >> /etc/php/7.1/mods-available/swoole.ini \
+            && ln -s /etc/php/7.1/mods-available/swoole.ini /etc/php/7.1/cli/conf.d/swoole.ini \
+            && ln -s /etc/php/7.1/mods-available/swoole.ini /etc/php/7.1/fpm/conf.d/swoole.ini \
+            && service php7.1-fpm start \
             && mkdir -p /var/log/supervisor \
             && mkdir /var/run/sshd \
             && apt-get clean \
