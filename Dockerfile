@@ -43,7 +43,6 @@ RUN apt-get update &&  apt-get install -y \
             && tar -zxvf v3.3.2.tar.gz \
             && cd cphalcon-3.3.2/build \
             && sudo ./install \
-            && service php7.1-fpm start \
             && mkdir -p /var/log/supervisor \
             && mkdir /var/run/sshd \
             && apt-get clean \
