@@ -4,7 +4,7 @@ MAINTAINER peterpang 10846295@qq.com
 
 COPY sshd_config /etc/ssh/
 
-RUN  add-apt-repository -y ppa:ondrej/php && apt-get update && apt install -y –allow-unauthenticated \
+RUN  add-apt-repository ppa:ondrej/php && apt-get update && apt install -y –allow-unauthenticated \
             --no-install-recommends \
             sudo \
             curl \
