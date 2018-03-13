@@ -4,31 +4,9 @@ MAINTAINER peterpang 10846295@qq.com
 
 COPY sshd_config /etc/ssh/
 
-RUN  apt-get update && apt-get install -y \ 
-		apt-transport-https lsb-release ca-certificates \
-            wget \
-            lsb-release \
-            wget -O /etc/apt/trusted.gpg.d/php.gpg https://packages.sury.org/php/apt.gpg; \
-            echo "deb https://packages.sury.org/php/ $(lsb_release -sc) main" > /etc/apt/sources.list.d/php.list;
-RUN  apt-get update && apt-get install -y \
-            sudo \
-            curl \
-            nodejs \
-            npm \
-            nginx-full \
-            zlib1g-dev \
-            vim \
-            libssl-dev \
-            unzip \
-            wget \
-            git \
-            make \
-            gcc \
-            passwd \
-            openssl \
-            openssh-server \
-            subversion \
-            supervisor \
+RUN  apt-get update && apt-get install -y software-properties-common \
+            python-software-properties && LC_ALL=C.UTF-8 add-apt-repository -y ppa:ondrej/php \
+            apt-get update && apt-get install -y \
             php7.1 \
             php7.1-bcmath \
             php7.1-cli \
@@ -50,6 +28,24 @@ RUN  apt-get update && apt-get install -y \
             php7.1-mcrypt \
             php7.1-zip \
             php7.1-redis \
+            sudo \
+            curl \
+            nodejs \
+            npm \
+            nginx-full \
+            zlib1g-dev \
+            vim \
+            libssl-dev \
+            unzip \
+            wget \
+            git \
+            make \
+            gcc \
+            passwd \
+            openssl \
+            openssh-server \
+            subversion \
+            supervisor \
             && curl -sS https://getcomposer.org/installer | php \
             && mv composer.phar /usr/local/bin/composer \
             && cd /home && rm -rf temp && mkdir temp && cd temp \
