@@ -1,15 +1,10 @@
-FROM ubuntu:16.04
+FROM php:7.1-fpm-alpine
 
 MAINTAINER  peterpang 10846295@qq.com
 
 COPY sshd_config /etc/ssh/
 
-RUN  apt-get update && apt-get install -y curl \
-            curl -sSLo /etc/apt/trusted.gpg.d/sury-php.gpg https://packages.sury.org/php/apt.gpg && \
-            echo "deb https://packages.sury.org/php/ stretch main" > /etc/apt/sources.list.d/php.list \
-            apt-get update && apt-get install -y \
-            php7.1 \
-            php7.1-fpm \
+RUN  apt-get update && apt-get install -y \
             php7.1-cli \
             php7.1-common \
             php7.1-mbstring \
