@@ -4,30 +4,13 @@ MAINTAINER  peterpang <10846295@qq.com>
 
 COPY sshd_config /etc/ssh/
 
-RUN apt-get update && apt-get install software-properties-common && add-apt-repository ppa:ondrej/php \
-            apt-get update && apt-get install -y \
-            wget \
-            curl \
-            zip \
-            unzip \
-            zip \
-            sudo \
-            curl \
-            npm \
-            nginx-full \
-            zlib1g-dev \
-            vim \
-            libssl-dev \
-            unzip \
-            wget \
-            git \
-            make \
-            gcc \
-            passwd \
-            openssl \
-            openssh-server \
-            subversion \
-            supervisor \
+RUN apt-get update && apt-get install -y language-pack-en-base  \
+            locale-gen en_US.UTF-8  \
+            apt-get install software-properties-common \
+            LC_ALL=en_US.UTF-8 add-apt-repository ppa:ondrej/php  \
+            apt-get update \
+            apt-cache search php7.1 \
+            apt-get -y install  \
             php7.1 \
             php7.1-fpm \
             php7.1-cli \
@@ -50,6 +33,28 @@ RUN apt-get update && apt-get install software-properties-common && add-apt-repo
             php7.1-xml \
             php7.1-intl \
             php7.1-mbstring \
+            wget \
+            curl \
+            zip \
+            unzip \
+            zip \
+            sudo \
+            curl \
+            npm \
+            nginx-full \
+            zlib1g-dev \
+            vim \
+            libssl-dev \
+            unzip \
+            wget \
+            git \
+            make \
+            gcc \
+            passwd \
+            openssl \
+            openssh-server \
+            subversion \
+            supervisor \
             && curl -sS https://getcomposer.org/installer | php \
             && mv composer.phar /usr/local/bin/composer \
             && cd /home && rm -rf temp && mkdir temp && cd temp \
