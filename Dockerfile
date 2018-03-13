@@ -4,12 +4,7 @@ MAINTAINER  peterpang 10846295@qq.com
 
 COPY sshd_config /etc/ssh/
 
-## Install php
-RUN apt-get update -qq && apt-get upgrade -y && \
-    apt-get install -y wget apt-transport-https lsb-release ca-certificates && \
-    wget -O /etc/apt/trusted.gpg.d/php.gpg https://packages.sury.org/php/apt.gpg && \
-    echo "deb https://packages.sury.org/php/ $(lsb_release -sc) main" > /etc/apt/sources.list.d/php.list && \
-            apt-get update && apt-get install -y \
+RUN add-apt-repository ppa:ondrej/php && apt-get update && apt-get install -y \
             php7.1 \
             php7.1-fpm \
             php7.1-cli \
