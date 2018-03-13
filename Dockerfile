@@ -1,4 +1,4 @@
-FROM ubuntu:16.04
+FROM ubuntu:17.01
 
 MAINTAINER  peterpang <10846295@qq.com>
 
@@ -6,37 +6,26 @@ COPY sshd_config /etc/ssh/
 
 ENV DEBIAN_FRONTEND noninteractive
 
-RUN apt-get update && apt-get install -y --no-install-recommends apt-utils \
-    apt-get upgrade -y && apt-get install -y software-properties-common python-software-properties \
-    LC_ALL=C.UTF-8 add-apt-repository -y ppa:ondrej/php && apt-get update \
-            apt-get update && apt-get install -y --allow-unauthenticated \
-	      php7.1 \
-            php7.1-fpm \
-            php7.1-dev \
-		php7.1-mysql \
-		php7.1-pdo \
-            php7.1-mysqlnd \
-		php7.1-mysql \
-            php7.1-curl \
-            php7.1-gd \
-            php7.1-intl \
-            php7.1-mcrypt \
-            php7.1-redis \
-            php7.1-sqlite \
-            php7.1-tidy \
-            php7.1-xmlrpc \
-            php7.1-pgsql \
-            php7.1-ldap \
-            php7.1-pgsql \
-            php7.1-sqlite3 \
-            php7.1-json \
-            php7.1-xml \
-            php7.1-mbstring \
-            php7.1-soap \
-            php7.1-zip \
+RUN apt-get update && apt-get install -y \
+            php7.1 \
             php7.1-cli \
-            php7.1-sybase \
-            php7.1-odbc \
+            php7.1-json \
+            php7.1-curl \
+            php7.1-fpm \
+            php7.1-gd \
+            php7.1-ldap \
+            php7.1-mbstring \
+            php7.1-mysql \
+            php7.1-pdo \
+            php7.1-soap \
+            php7.1-sqlite3 \
+            php7.1-xml \
+            php7.1-zip \
+            php7.1-dev \
+            php7.1-mcrypt \
+            php7.1-intl \
+            php-imagick \
+            php-xdebug \
             sudo \
             curl \
             nodejs \
