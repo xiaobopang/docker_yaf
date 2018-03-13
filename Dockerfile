@@ -1,8 +1,9 @@
 FROM ubuntu:16.04
 
-MAINTAINER peterpang 10846295@qq.com
+MAINTAINER  peterpang <10846295@qq.com>
 
 COPY sshd_config /etc/ssh/
+
 ENV DEBIAN_FRONTEND noninteractive
 
 RUN apt-get update && apt-get install -y --no-install-recommends apt-utils \
