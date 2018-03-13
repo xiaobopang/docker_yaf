@@ -1,64 +1,59 @@
-FROM devgeniem/ubuntu-docker-openresty-pagespeed
+FROM ubuntu:16.04
 
-MAINTAINER  peterpang 10846295@qq.com
+MAINTAINER  peterpang <10846295@qq.com>
 
 COPY sshd_config /etc/ssh/
+# Let the container know that there is no tty
+ENV DEBIAN_FRONTEN noninteractive
 
-ARG LANG=C.UTF-8
-ARG DEBIAN_FRONTEND=noninteractive
-
-RUN  apt-get update && apt-get -y install software-properties-common && add-apt-repository ppa:ondrej/php && apt-get -y --no-install-recommends install \
-            apt-utils \
-            curl \
-            nano \
-            ca-certificates \
-            postfix \
-            netcat \
-            libmcrypt-dev \
-            sudo \
-            nodejs \
-            npm \
-            nginx-full \
-            zlib1g-dev \
-            vim \
-            libssl-dev \
-            unzip \
-            wget \
-            git \
-            make \
-            gcc \
-            passwd \
-            openssl \
-            openssh-server \
-            subversion \
-            supervisor \
-            apt-get update \
-            apt-get -y install php7.1 \
-            apt-get -y --no-install-recommends install \
-            php7.1-cli \
+RUN dpkg-divert --local --rename --add /sbin/initctl && \
+	ln -sf /bin/true /sbin/initctl && \
+	mkdir /var/run/sshd && \
+	mkdir /run/php && \
+	apt-get update && \
+	apt-get install -y --no-install-recommends apt-utils \ 
+		software-properties-common \
+		python-software-properties \
+		language-pack-en-base && \
+	LC_ALL=en_US.UTF-8 add-apt-repository ppa:ondrej/php && \
+	apt-get update && apt-get upgrade -y && \
+	apt-get install -y python-setuptools \ 
+		curl \
+		git \
+		nano \
+		sudo \
+		unzip \
+		openssh-server \
+		openssl \
+		supervisor \
+		nginx \
+		memcached \
+		ssmtp \
+		cron && \
+	      apt-get install -y php7.1-fpm \
             php7.1-dev \
-            php7.1-common \
-            php7.1-apcu \
-            php7.1-apcu-bc \
+		php7.1-mysql \
             php7.1-curl \
-            php7.1-json \
-            php7.1-mcrypt \
-            php7.1-opcache \
-            php7.1-readline \
-            php7.1-xml \
-            php7.1-zip \
-            php7.1-fpm \
-            php7.1-redis \
-            php7.1-mongodb \
-            php7.1-mysqli \
-            php7.1-intl \
             php7.1-gd \
+            php7.1-intl \
+            php7.1-mcrypt \
+            php-memcache \
+            php7.1-sqlite \
+            php7.1-tidy \
+            php7.1-xmlrpc \
+            php7.1-pgsql \
+            php7.1-ldap \
+            freetds-common \
+            php7.1-pgsql \
+            php7.1-sqlite3 \
+            php7.1-json \
+            php7.1-xml \
             php7.1-mbstring \
             php7.1-soap \
-            php7.1-bcmath \
-            php7.1-curl \
-            php7.1-ldap \
-            php7.1-mcrypt \
+            php7.1-zip \
+            php7.1-cli \
+            php7.1-sybase \
+            php7.1-odbc \
             && curl -sS https://getcomposer.org/installer | php \
             && mv composer.phar /usr/local/bin/composer \
             && cd /home && rm -rf temp && mkdir temp && cd temp \
