@@ -10,7 +10,6 @@ RUN apt-get update \
     && apt-get install -y --no-install-recommends \
     bison \
     nginx \
-    supervisor \
     php7.1-apc \
     php7.1-apcu \
     php7.1-bz2 \
