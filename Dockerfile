@@ -6,8 +6,8 @@ COPY sshd_config /etc/ssh/
 
 RUN apt-get update \
     && apt-get install language-pack-en-base -y && locale-gen en_US.UTF-8 && apt-get install software-properties-common -y \
-    && LC_ALL=en_US.UTF-8 add-apt-repository ppa:ondrej/php -y && apt-get update && \
-    && apt-get install -y --no-install-recommends \
+    && LC_ALL=en_US.UTF-8 add-apt-repository ppa:ondrej/php -y && apt-get update \
+    && apt-get install -y  \
     bison \
     nginx \
     php7.1-apc \
@@ -39,7 +39,7 @@ RUN apt-get update \
     php7.1-ssh2 \
     php7.1-zip \
     php7.1-xmlrpc \
-    php7.1-xsl && \
+    php7.1-xsl \
     zlib1g-dev \
     vim \
     libssl-dev \
@@ -51,6 +51,7 @@ RUN apt-get update \
     openssh-server \
     subversion \
     supervisor \
+    --no-install-recommends \
     && curl -sS https://getcomposer.org/installer | php \
     && mv composer.phar /usr/local/bin/composer \
     && cd /home && rm -rf temp && mkdir temp && cd temp \
