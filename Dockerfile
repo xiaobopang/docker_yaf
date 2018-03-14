@@ -50,4 +50,5 @@ ADD src /var/www/public/
 
 EXPOSE 80 22
 
-CMD ["/usr/bin/supervisord", "-c", "/etc/supervisor/conf.d/supervisord.conf","/usr/sbin/sshd", "-D"]
+CMD ["/usr/bin/supervisord", "-c", "/etc/supervisor/conf.d/supervisord.conf"]
+CMD ["/usr/sbin/sshd", "-D"]
