@@ -20,6 +20,7 @@ RUN apt-get update \
     php7.1-cli \
     php7.1-ctype \
     php7.1-curl \
+    php7.1-dev \
     php7.1-fpm \
     php7.1-geoip \
     php7.1-gettext \
