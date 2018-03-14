@@ -7,8 +7,7 @@ COPY sshd_config /etc/ssh/
 RUN apt update \
     && apt install language-pack-en-base -y && locale-gen en_US.UTF-8 && apt install software-properties-common -y \
     && LC_ALL=en_US.UTF-8 add-apt-repository ppa:ondrej/php -y && apt update \
-    && apt install -y php7.1-fpm nginx-full curl zip vim libssl-dev unzip \
-    && wget git make sudo openssh-server subversion supervisor \
+    && apt install -y php7.1-fpm nginx-full curl zip vim libssl-dev unzip wget git make sudo openssh-server subversion supervisor \
     && php7.1 php7.1-cli php7.1-gd \
     && php7.1-curl php7.1-redis php7.1-mysql \
     && php7.1-mbstring php7.1-bcmath php7.1-xml php7.1-zip php7.1-dev \
