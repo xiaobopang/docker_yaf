@@ -6,10 +6,41 @@ COPY sshd_config /etc/ssh/
 
 RUN apt-get update \
     && apt-get install language-pack-en-base -y && locale-gen en_US.UTF-8 && apt-get install software-properties-common -y \
-    && LC_ALL=en_US.UTF-8 add-apt-repository ppa:ondrej/php -y && apt-get update \
-    && apt-get install -y bison nginx-full curl zip php7.1 php7.1-fpm php7.1-cli  php7.1-gd \
-    php7.1-curl php7.1-redis php7.1-mysql php7.1-mbstring php7.1-bcmath php7.1-xml php7.1-zip php7.1-dev \
-    php7.1-amqp php7.1-pgsql php7.1-sqlite3 php7.1-memcached php7.1-imap php7.1-soap php7.1-bcmath php7.1-intl php7.1-readline php-xdebug php-pear \
+    && LC_ALL=en_US.UTF-8 add-apt-repository ppa:ondrej/php -y && apt-get update && \
+    && apt-get install -y --no-install-recommends \
+    bison \
+    nginx \
+    supervisor \
+    php7.1-apc \
+    php7.1-apcu \
+    php7.1-bz2 \
+    php7.1-bcmath \
+    php7.1-calendar \
+    php7.1-cgi \
+    php7.1-cli \
+    php7.1-ctype \
+    php7.1-curl \
+    php7.1-fpm \
+    php7.1-geoip \
+    php7.1-gettext \
+    php7.1-gd \
+    php7.1-intl \
+    php7.1-imap \
+    php7.1-ldap \
+    php7.1-mbstring \
+    php7.1-mcrypt \
+    php7.1-memcached \
+    php7.1-mongo \
+    php7.1-mysql \
+    php7.1-pdo \
+    php7.1-pgsql \
+    php7.1-redis \
+    php7.1-soap \
+    php7.1-sqlite3 \
+    php7.1-ssh2 \
+    php7.1-zip \
+    php7.1-xmlrpc \
+    php7.1-xsl && \
     zlib1g-dev \
     vim \
     libssl-dev \
