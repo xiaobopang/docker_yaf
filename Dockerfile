@@ -10,7 +10,7 @@ RUN apt-get update \
     && apt-get install -y  \
     curl \
     bison \
-    nginx \
+    nginx-full \
     php7.1-apc \
     php7.1-apcu \
     php7.1-bz2 \
