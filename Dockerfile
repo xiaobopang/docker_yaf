@@ -11,8 +11,7 @@ RUN apt-get update \
     curl \
     bison \
     nginx-full \
-    php7.1-apc \
-    php7.1-apcu \
+    php7.1-fpm \
     php7.1-bz2 \
     php7.1-bcmath \
     php7.1-calendar \
@@ -21,7 +20,6 @@ RUN apt-get update \
     php7.1-ctype \
     php7.1-curl \
     php7.1-dev \
-    php7.1-fpm \
     php7.1-geoip \
     php7.1-gettext \
     php7.1-gd \
