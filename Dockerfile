@@ -6,10 +6,8 @@ COPY sshd_config /etc/ssh/
 
 RUN apt update \
     && apt install language-pack-en-base -y && locale-gen en_US.UTF-8 && apt install software-properties-common -y \
-    && LC_ALL=en_US.UTF-8 add-apt-repository ppa:ondrej/php -y && apt update \
-    && apt install -y nginx-full curl zip php7.1 php7.1-fpm php7.1-cli  php7.1-gd \
-    php7.1-curl php7.1-redis php7.1-mysql php7.1-mbstring php7.1-bcmath php7.1-xml php7.1-zip php7.1-dev \
-    php7.1-amqp php7.1-pgsql php7.1-sqlite3 php7.1-memcached php7.1-imap php7.1-soap php7.1-bcmath php7.1-intl php7.1-readline php-xdebug php-pear \
+    && LC_ALL=en_US.UTF-8 add-apt-repository ppa:ondrej/php -y && apt update && \
+    apt install -y bison libxml2 nginx-full curl zip \
     zlib1g-dev \
     vim \
     libssl-dev \
@@ -20,7 +18,32 @@ RUN apt update \
     sudo \
     openssh-server \
     subversion \
-    supervisor \
+    supervisor && \
+    # Install PHP
+	apt-get install -y php7.1-fpm \
+    php7.1-mysql \
+    php7.1-pdo \
+    php7.1-curl \
+    php7.1-gd \
+    php7.1-intl \
+    php7.1-mcrypt \
+    php-memcache \
+    php7.1-sqlite \
+    php7.1-tidy \
+    php7.1-xmlrpc \
+    php7.1-pgsql \
+    php7.1-ldap \
+    freetds-common \
+    php7.1-pgsql \
+    php7.1-sqlite3 \
+    php7.1-json \
+    php7.1-xml \
+    php7.1-mbstring \
+    php7.1-soap \
+    php7.1-zip \
+    php7.1-cli \
+    php7.1-sybase \
+    php7.1-odbc \
     && curl -sS https://getcomposer.org/installer | php \
     && mv composer.phar /usr/local/bin/composer \
     && cd /home && rm -rf temp && mkdir temp && cd temp \
