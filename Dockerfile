@@ -4,9 +4,9 @@ MAINTAINER  peterpang <10846295@qq.com>
 
 COPY sshd_config /etc/ssh/
 
-RUN apt-get update \
-    && apt-get install language-pack-en-base -y && locale-gen en_US.UTF-8 && apt-get install software-properties-common -y \
-    && LC_ALL=en_US.UTF-8 add-apt-repository ppa:ondrej/php -y && apt-get update \
+RUN apt update \
+    && apt install language-pack-en-base -y && locale-gen en_US.UTF-8 && apt install software-properties-common -y \
+    && LC_ALL=en_US.UTF-8 add-apt-repository ppa:ondrej/php -y && apt update \
     && apt-get install -y  \
     curl \
     bison \
