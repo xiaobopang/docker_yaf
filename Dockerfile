@@ -92,4 +92,4 @@ COPY start.sh /root/start.sh
 WORKDIR /root
 RUN chmod +x start.sh
 
-CMD ["/usr/sbin/sshd", "-D", "./start.sh"]
+CMD ["/usr/sbin/sshd", "-D"]
