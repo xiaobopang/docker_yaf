@@ -77,8 +77,6 @@ RUN apt-get update -y \
     && apt-get autoclean \
     && apt-get autoremove \
     && rm -rf /var/lib/apt/lists/* \
-    && service php7.1-fpm start \
-    && service nginx start \
     && useradd admin \
     && echo 'root:pang123' | chpasswd \
     && /etc/init.d/ssh restart \
@@ -88,7 +86,7 @@ RUN apt-get update -y \
 COPY build/.bashrc /root/.bashrc
 COPY build/nginx.conf /etc/nginx/sites-enabled/default
 COPY build/app.conf /etc/nginx/conf.d/app.conf
-    
+RUN  service php7.1-fpm start && service nginx start
 
 ADD src /var/www/app/
 
