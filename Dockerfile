@@ -77,7 +77,7 @@ RUN apt-get update \
 COPY build/.bashrc /root/.bashrc
 COPY build/supervisord.conf /etc/supervisor/conf.d/supervisord.conf
 COPY build/nginx.conf /etc/nginx/sites-enabled/default
-COPY build/app.conf /etc/nginx/sites-enabled/app.conf
+COPY build/app.conf /etc/nginx/conf.d/app.conf
 COPY build/php.ini /etc/php/7.1/fpm/php.ini
 
 ADD src /var/www/app/
