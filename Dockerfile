@@ -78,6 +78,7 @@ RUN apt-get update -y \
     && apt-get autoremove \
     && rm -rf /var/lib/apt/lists/* \
     && service php7.1-fpm start \
+    && service nginx start \
     && useradd admin \
     && echo 'root:pang123' | chpasswd \
     && /etc/init.d/ssh restart \
