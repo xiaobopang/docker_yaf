@@ -50,6 +50,12 @@ RUN apt-get update -y \
     unzip \
     wget \
     git \
+    imagemagick \
+	zlib1g-dev \
+	libfreetype6-dev \
+	libxpm-dev \
+	libjpeg-dev \
+	libpng-dev \
     make \
     sudo \
     net-tools \
@@ -74,15 +80,15 @@ RUN apt-get update -y \
     && service php7.1-fpm start \
     && useradd admin \
     && echo 'root:pang123' | chpasswd \
-    && /etc/init.d/ssh restart
+    && /etc/init.d/ssh restart \
+    && cp /usr/share/zoneinfo/Asia/Shanghai /etc/localtime \
+    && echo 'Asia/Shanghai' > /etc/timezone
 
 COPY build/.bashrc /root/.bashrc
-COPY build/supervisord.conf /etc/supervisor/conf.d/supervisord.conf
 COPY build/nginx.conf /etc/nginx/sites-enabled/default
 COPY build/app.conf /etc/nginx/conf.d/app.conf
+    
 
 ADD src /var/www/app/
 
-EXPOSE 80 22
-
-CMD ["/usr/bin/supervisord", "-c", "/etc/supervisor/conf.d/supervisord.conf"]
+CMD ["/usr/sbin/sshd","-D"]
