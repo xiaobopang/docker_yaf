@@ -1,6 +1,6 @@
 FROM ubuntu:16.04
 
-MAINTAINER  peterpang <10846295@qq.com>
+MAINTAINER  pangxiaobo <10846295@qq.com>
 
 COPY sshd_config /etc/ssh/
 
