@@ -1,4 +1,4 @@
-FROM ubuntu
+FROM ubuntu:16.04
 
 MAINTAINER  peterpang <10846295@qq.com>
 
@@ -8,6 +8,7 @@ RUN apt update \
     && apt install language-pack-en-base -y && locale-gen en_US.UTF-8 && apt install software-properties-common -y \
     && LC_ALL=en_US.UTF-8 add-apt-repository ppa:ondrej/php -y && apt update \
     && apt-get install -y  \
+    tzdata \
     curl \
     bison \
     nginx-full \
