@@ -5,8 +5,9 @@ MAINTAINER  pangxiaobo <10846295@qq.com>
 COPY sshd_config /etc/ssh/
 
 RUN apt-get update \
-    && apt-get install language-pack-en-base -y && locale-gen en_US.UTF-8 && apt-get install software-properties-common -y \
-    && LC_ALL=en_US.UTF-8 add-apt-repository ppa:ondrej/php -y && apt-get update \
+    && apt-get install software-properties-common \
+    && add-apt-repository ppa:ondrej/php \
+    && apt-get update -y \
     && apt-get install -y  \
     tzdata \
     curl \
