@@ -1,4 +1,4 @@
-FROM ubuntu16.04
+FROM ubuntu
 
 MAINTAINER  peterpang <10846295@qq.com>
 
