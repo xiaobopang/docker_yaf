@@ -1,4 +1,4 @@
-FROM ubuntu
+FROM ubuntu16.04
 
 MAINTAINER  peterpang <10846295@qq.com>
 
@@ -55,12 +55,6 @@ RUN apt update \
     && curl -sS https://getcomposer.org/installer | php \
     && mv composer.phar /usr/local/bin/composer \
     && cd /home && rm -rf temp && mkdir temp && cd temp \
-    && wget https://github.com/swoole/swoole-src/archive/v1.10.2.tar.gz \
-    && tar -zxvf v1.10.2.tar.gz \
-    && cd swoole-src-1.10.2 \
-    && phpize \
-    && ./configure \
-    && make && sudo make install \
     && wget https://github.com/phalcon/cphalcon/archive/v3.3.2.tar.gz \
     && tar -zxvf v3.3.2.tar.gz \
     && cd cphalcon-3.3.2/build \
@@ -68,16 +62,13 @@ RUN apt update \
     && echo extension=phalcon.so >> /etc/php/7.1/mods-available/phalcon.ini \
     && ln -s /etc/php/7.1/mods-available/phalcon.ini /etc/php/7.1/cli/conf.d/phalcon.ini \
     && ln -s /etc/php/7.1/mods-available/phalcon.ini /etc/php/7.1/fpm/conf.d/phalcon.ini \
-    && echo extension=swoole.so >> /etc/php/7.1/mods-available/swoole.ini \
-    && ln -s /etc/php/7.1/mods-available/swoole.ini /etc/php/7.1/cli/conf.d/swoole.ini \
-    && ln -s /etc/php/7.1/mods-available/swoole.ini /etc/php/7.1/fpm/conf.d/swoole.ini \
     && mkdir -p /var/log/supervisor \
     && apt-get autoclean \
     && apt-get autoremove \
     && rm -rf /var/lib/apt/lists/* \
     #添加ssh用户
     && useradd admin \
-    && echo 'root:123456' | chpasswd \
+    && echo 'root:pang123' | chpasswd \
     && /etc/init.d/ssh restart
 
 COPY build/.bashrc /root/.bashrc

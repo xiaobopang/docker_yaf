@@ -1,12 +1,64 @@
-version: "2"
+version: "3"
 services:
-  # 阿里云内网 registry-internal.cn-hangzhou.aliyuncs.com/peterpang/php7.1
-  # 阿里云公网 registry.cn-hangzhou.aliyuncs.com/peterpang/php7.1
-  peterpang:
-        container_name: peterpang
-        image: registry.cn-hangzhou.aliyuncs.com/peterpang/php7.1
+    # MySQL 5.7: https://hub.docker.com/_/mysql/
+    mysql:
+        container_name: mysql
+        image: mysql:5.7
+        restart: always
+        privileged: true
+        environment:
+            MYSQL_ROOT_PASSWORD: "pang123"
+            MYSQL_USER: "root"
+            MYSQL_PASSWORD: "pang123"
+            #MYSQL_DATABASE: "test"
         volumes:
-            - /home/docker_user/peterpang/www:/var/www/public
+            #- /home/docker/mysql:/var/lib/mysql
+            - /Users/xiaobopang/Downloads/personal/docker/mysql:/var/lib/mysql
         ports:
-            - "8081:80"
+            - "13306:3306"
+
+    # Redis 3.2.10: https://hub.docker.com/_/redis/
+    redis:
+        container_name: redis
+        image: redis:3.2.10
+        restart: always
+        privileged: true
+        volumes:
+            #- /home/docker/redis:/data
+            - /Users/xiaobopang/Downloads/personal/docker/redis:/data
+        ports:
+            - "16379:6379"
+
+    # SD框架阿里云内网 registry.cn-hangzhou.aliyuncs.com/pangxiaobo/sd3
+    sd3:
+        container_name: sd3
+        image: registry.cn-hangzhou.aliyuncs.com/pangxiaobo/sd3
+        restart: always
+        privileged: true
+        links:
+            - mysql
+            - redis
+        volumes:
+            #- /home/docker_user/peter:/home
+            - /Users/xiaobopang/Downloads/personal/docker/sd3:/home
+        ports: 
+            - "10191:9091"
+            - "10192:9092"
+            - "10193:9093"
             - "10122:22"
+    nginx:
+        container_name: nginx
+        image: nginx
+        restart: always
+        volumes:
+            - ./config/nginx.conf:/etc/nginx/conf.d/default.conf:ro
+            - ./web/index.html:/var/nginx/app/index.html:ro
+            - /Users/xiaobopang/Downloads/personal/docker/nginx:/var/nginx/app
+        ports:
+            - 8081:80
+            - 8082:8082
+            - 8083:8083
+            - 8084:8084
+            - 8085:8085
+            - 8086:8086
+            - 10443:443
