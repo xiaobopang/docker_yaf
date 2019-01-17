@@ -5,7 +5,7 @@ MAINTAINER  pangxiaobo <10846295@qq.com>
 COPY sshd_config /etc/ssh/
 
 RUN apt-get update -y \
-    && apt-get install -y software-properties-common \
+    && apt-get install -y python-software-properties \
     && add-apt-repository ppa:ondrej/php \
     && apt-get update -y \
     && apt-get install -y  \
