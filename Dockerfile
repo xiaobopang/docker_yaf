@@ -16,10 +16,10 @@ RUN apt-get update -y \
     nginx-full \
     php7.1 \
     php7.1-fpm \
+    php7.1-cgi \
     php7.1-bz2 \
     php7.1-bcmath \
     php7.1-calendar \
-    php7.1-cgi \
     php7.1-cli \
     php7.1-ctype \
     php7.1-curl \
@@ -71,7 +71,7 @@ RUN apt-get update -y \
     && apt-get autoclean \
     && apt-get autoremove \
     && rm -rf /var/lib/apt/lists/* \
-    #添加ssh用户
+    && service php7.1-fpm start \
     && useradd admin \
     && echo 'root:pang123' | chpasswd \
     && /etc/init.d/ssh restart
@@ -80,7 +80,6 @@ COPY build/.bashrc /root/.bashrc
 COPY build/supervisord.conf /etc/supervisor/conf.d/supervisord.conf
 COPY build/nginx.conf /etc/nginx/sites-enabled/default
 COPY build/app.conf /etc/nginx/conf.d/app.conf
-COPY build/php.ini /etc/php/7.1/fpm/php.ini
 
 ADD src /var/www/app/
 
