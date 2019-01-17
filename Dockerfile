@@ -5,56 +5,59 @@ MAINTAINER  pangxiaobo <10846295@qq.com>
 COPY sshd_config /etc/ssh/
 
 RUN apt-get update -y \
-    && apt-get install -y software-properties-common language-pack-en-base \
+    apt-get install -y language-pack-en-base \
+    && export LC_ALL=en_US.UTF-8 \
+    && export LANG=en_US.UTF-8 \
+    && apt-get install -y software-properties-common \
     && LC_ALL=en_US.UTF-8 add-apt-repository ppa:ondrej/php \
     && apt-get update -y \
     && apt-get install -y  \
-    tzdata \
-    curl \
-    bison \
-    nginx-full \
-    php7.1 \
-    php7.1-fpm \
-    php7.1-bz2 \
-    php7.1-bcmath \
-    php7.1-calendar \
-    php7.1-cgi \
-    php7.1-cli \
-    php7.1-ctype \
-    php7.1-curl \
-    php7.1-dev \
-    php7.1-geoip \
-    php7.1-gettext \
-    php7.1-gd \
-    php7.1-intl \
-    php7.1-imap \
-    php7.1-ldap \
-    php7.1-mbstring \
-    php7.1-mcrypt \
-    php7.1-memcached \
-    php7.1-mongo \
-    php7.1-mysql \
-    php7.1-pdo \
-    php7.1-pgsql \
-    php7.1-redis \
-    php7.1-soap \
-    php7.1-sqlite3 \
-    php7.1-ssh2 \
-    php7.1-zip \
-    php7.1-xmlrpc \
-    php7.1-xsl \
-    zlib1g-dev \
-    vim \
-    libssl-dev \
-    unzip \
-    wget \
-    git \
-    make \
-    sudo \
-    net-tools \
-    openssh-server \
-    subversion \
-    supervisor \
+    && tzdata \
+    && curl \
+    && bison \
+    && nginx-full \
+    && php7.1 \
+    && php7.1-fpm \
+    && php7.1-bz2 \
+    && php7.1-bcmath \
+    && php7.1-calendar \
+    && php7.1-cgi \
+    && php7.1-cli \
+    && php7.1-ctype \
+    && php7.1-curl \
+    && php7.1-dev \
+    && php7.1-geoip \
+    && php7.1-gettext \
+    && php7.1-gd \
+    && php7.1-intl \
+    && php7.1-imap \
+    && php7.1-ldap \
+    && php7.1-mbstring \
+    && php7.1-mcrypt \
+    && php7.1-memcached \
+    && php7.1-mongo \
+    && php7.1-mysql \
+    && php7.1-pdo \
+    && php7.1-pgsql \
+    && php7.1-redis \
+    && php7.1-soap \
+    && php7.1-sqlite3 \
+    && php7.1-ssh2 \
+    && php7.1-zip \
+    && php7.1-xmlrpc \
+    && php7.1-xsl \
+    &&zlib1g-dev \
+    && vim \
+    && libssl-dev \
+    && unzip \
+    && wget \
+    && git \
+    && make \
+    && sudo \
+    && net-tools \
+    && openssh-server \
+    && subversion \
+    && supervisor \
     --no-install-recommends \
     && curl -sS https://getcomposer.org/installer | php \
     && mv composer.phar /usr/local/bin/composer \
