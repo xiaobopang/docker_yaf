@@ -90,5 +90,4 @@ COPY build/php.ini /etc/php/7.1/fpm/php.ini
 COPY ["start.sh", "/root/start.sh"]
 ADD src /var/www/app/
 
-ENTRYPOINT ["start.sh"]
-CMD ["/usr/sbin/sshd", "-De"]
+CMD ["/usr/sbin/sshd", "-D"]
