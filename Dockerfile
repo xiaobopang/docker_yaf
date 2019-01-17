@@ -77,7 +77,7 @@ COPY build/supervisord.conf /etc/supervisor/conf.d/supervisord.conf
 COPY build/nginx.conf /etc/nginx/sites-enabled/default
 COPY build/php.ini /etc/php/7.1/fpm/php.ini
 
-ADD src /var/www/public/
+ADD src /var/www/app/
 
 EXPOSE 80 22
 
