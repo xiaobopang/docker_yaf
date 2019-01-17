@@ -12,6 +12,7 @@ RUN apt update \
     curl \
     bison \
     nginx-full \
+    php7.1 \
     php7.1-fpm \
     php7.1-bz2 \
     php7.1-bcmath \
@@ -49,6 +50,7 @@ RUN apt update \
     git \
     make \
     sudo \
+    net-tools \
     openssh-server \
     subversion \
     supervisor \
@@ -75,6 +77,7 @@ RUN apt update \
 COPY build/.bashrc /root/.bashrc
 COPY build/supervisord.conf /etc/supervisor/conf.d/supervisord.conf
 COPY build/nginx.conf /etc/nginx/sites-enabled/default
+COPY build/app.conf /etc/nginx/sites-enabled/app.conf
 COPY build/php.ini /etc/php/7.1/fpm/php.ini
 
 ADD src /var/www/app/

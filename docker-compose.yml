@@ -21,10 +21,10 @@ services:
     redis:
         container_name: redis
         image: redis:3.2.10
+        command: redis-server --requirepass pang123
         restart: always
         privileged: true
         volumes:
-            #- /home/docker/redis:/data
             - /Users/xiaobopang/Downloads/personal/docker/redis:/data
         ports:
             - "16379:6379"
@@ -42,11 +42,11 @@ services:
             #- /home/docker_user/peter:/home
             - /Users/xiaobopang/Downloads/personal/docker/phalcon:/var/www/app
         ports: 
-            - 8081:80
-            - 8082:8082
-            - 8083:8083
-            - 8084:8084
-            - 8085:8085
-            - 8086:8086
-            - 10443:443
-            - 10122:22
+            - "8081:80"
+            - "8082:8082"
+            - "8083:8083"
+            - "8084:8084"
+            - "8085:8085"
+            - "8086:8086"
+            - "10443:443"
+            - "10122:22"
