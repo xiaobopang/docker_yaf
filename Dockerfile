@@ -51,11 +51,11 @@ RUN apt-get update -y \
     wget \
     git \
     imagemagick \
-	zlib1g-dev \
-	libfreetype6-dev \
-	libxpm-dev \
-	libjpeg-dev \
-	libpng-dev \
+    zlib1g-dev \
+    libfreetype6-dev \
+    libxpm-dev \
+    libjpeg-dev \
+    libpng-dev \
     make \
     sudo \
     net-tools \
@@ -86,8 +86,8 @@ RUN apt-get update -y \
 COPY build/.bashrc /root/.bashrc
 COPY build/nginx.conf /etc/nginx/sites-enabled/default
 COPY build/app.conf /etc/nginx/conf.d/app.conf
-RUN  service php7.1-fpm start && service nginx start
-
+COPY ["start.sh", "/root/start.sh"]
 ADD src /var/www/app/
+WORKDIR /root
 
-CMD ["/usr/sbin/sshd","-D"]
+CMD ["/usr/sbin/sshd", "-D", "./start.sh"]

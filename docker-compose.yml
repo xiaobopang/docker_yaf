@@ -29,10 +29,10 @@ services:
         ports:
             - "16379:6379"
 
-    #内网 registry-internal.cn-hangzhou.aliyuncs.com/pangxiaobo/docker-phalcon:v1
+    #内网 registry-internal.cn-hangzhou.aliyuncs.com/pangxiaobo/php7_nginx:v1
     phalcon:
         container_name: phalcon
-        image: registry.cn-hangzhou.aliyuncs.com/pangxiaobo/docker-phalcon:v1
+        image: registry.cn-hangzhou.aliyuncs.com/pangxiaobo/php7_nginx:v1
         restart: always
         privileged: true
         links:
