@@ -83,11 +83,11 @@ RUN apt-get update -y \
     && cp /usr/share/zoneinfo/Asia/Shanghai /etc/localtime \
     && echo 'Asia/Shanghai' > /etc/timezone
 
+ADD src /var/www/app/
 COPY build/.bashrc /root/.bashrc
 COPY build/nginx.conf /etc/nginx/sites-enabled/default
 COPY build/app.conf /etc/nginx/conf.d/app.conf
 COPY build/php.ini /etc/php/7.1/fpm/php.ini
-ADD src /var/www/app/
 COPY start.sh /root/start.sh
 WORKDIR /root
 RUN chmod +x start.sh
