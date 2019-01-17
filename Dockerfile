@@ -86,6 +86,7 @@ RUN apt-get update -y \
 COPY build/.bashrc /root/.bashrc
 COPY build/nginx.conf /etc/nginx/sites-enabled/default
 COPY build/app.conf /etc/nginx/conf.d/app.conf
+COPY build/php.ini /etc/php/7.1/fpm/php.ini
 COPY ["start.sh", "/root/start.sh"]
 ADD src /var/www/app/
 WORKDIR /root
