@@ -81,15 +81,18 @@ RUN apt-get update -y \
     && echo 'root:pang123' | chpasswd \
     && /etc/init.d/ssh restart \
     && cp /usr/share/zoneinfo/Asia/Shanghai /etc/localtime \
-    && echo 'Asia/Shanghai' > /etc/timezone
+    && echo 'Asia/Shanghai' > /etc/timezone \
+    && mkdir -p /var/www/app
 
-ADD src /var/www/app/
 COPY build/.bashrc /root/.bashrc
 COPY build/nginx.conf /etc/nginx/sites-enabled/default
 COPY build/app.conf /etc/nginx/conf.d/app.conf
 COPY build/php.ini /etc/php/7.1/fpm/php.ini
 COPY start.sh /root/start.sh
 WORKDIR /root
-RUN chmod +x start.sh
-CMD ["./start.sh"]
-CMD ["/usr/sbin/sshd", "-D"]
+
+#CMD ["/usr/sbin/sshd", "-D"]
+# start-up nginx and fpm and ssh
+CMD chmod +x start.sh && \
+    ./start.sh && \
+    /usr/sbin/sshd -D
