@@ -91,5 +91,5 @@ COPY build/php.ini /etc/php/7.1/fpm/php.ini
 COPY start.sh /root/start.sh
 WORKDIR /root
 RUN chmod +x start.sh
-
+CMD ["./start.sh"]
 CMD ["/usr/sbin/sshd", "-D"]
