@@ -83,7 +83,8 @@ RUN apt-get update -y \
     && cp /usr/share/zoneinfo/Asia/Shanghai /etc/localtime \
     && echo 'Asia/Shanghai' > /etc/timezone \
     && mkdir -p /var/www/app
-
+    
+COPY src/info.php /var/www/app/info.php
 COPY build/.bashrc /root/.bashrc
 COPY build/nginx.conf /etc/nginx/sites-enabled/default
 COPY build/app.conf /etc/nginx/conf.d/app.conf
