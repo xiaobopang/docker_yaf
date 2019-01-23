@@ -32,7 +32,6 @@ RUN apt-get update -y \
     php7.2-imap \
     php7.2-ldap \
     php7.2-mbstring \
-    php7.2-mcrypt \
     php7.2-memcached \
     php7.2-mongo \
     php7.2-mysql \
