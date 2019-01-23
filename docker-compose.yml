@@ -2,7 +2,7 @@ version: "3"
 services:
     lims_mysql:
         container_name: lims_mysql
-        image: mysql:8.0
+        image: mysql:5.7
         command: mysqld --sql_mode="STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION"
         restart: always
         privileged: true
@@ -18,7 +18,7 @@ services:
             - "3307:3306"
     lims_redis:
         container_name: lims_redis
-        image: redis:5.0
+        image: redis:3.2
         command: redis-server --requirepass lims_redis
         restart: always
         privileged: true

@@ -78,6 +78,14 @@ RUN apt-get update -y \
     && phpize \
     && ./configure --enable-redis-igbinary \
     && make &&  make install \
+    && wget https://github.com/swoole/swoole-src/archive/v4.2.12.tar.gz \
+	&& tar -xzvf v4.2.12.tar.gz \
+	&& cd /home/temp/swoole-src-4.2.12 \
+	&& phpize && ./configure --enable-async-redis  --enable-openssl --enable-mysqlnd && make \
+	&& make install \
+    && echo extension=swoole.so >> /etc/php/7.1/mods-available/swoole.ini \
+    && ln -s /etc/php/7.1/mods-available/swoole.ini /etc/php/7.1/cli/conf.d/swoole.ini \
+    && ln -s /etc/php/7.1/mods-available/swoole.ini /etc/php/7.1/fpm/conf.d/swoole.ini \
     && wget https://github.com/phalcon/cphalcon/archive/v3.3.2.tar.gz \
     && tar -zxvf v3.3.2.tar.gz \
     && cd cphalcon-3.3.2/build \
@@ -97,14 +105,6 @@ RUN apt-get update -y \
     && echo extension=yaf.so >> /etc/php/7.1/mods-available/yaf.ini \
     && ln -s /etc/php/7.1/mods-available/yaf.ini /etc/php/7.1/cli/conf.d/yaf.ini \
     && ln -s /etc/php/7.1/mods-available/yaf.ini /etc/php/7.1/fpm/conf.d/yaf.ini \
-    && wget https://github.com/swoole/swoole-src/archive/v4.2.5.tar.gz \
-	&& tar -xzvf v4.2.5.tar.gz \
-	&& cd /home/temp/swoole-src-4.2.5 \
-	&& phpize && ./configure --enable-async-redis  --enable-openssl --enable-mysqlnd && make \
-	&& make install \
-    && echo extension=swoole.so >> /etc/php/7.1/mods-available/swoole.ini \
-    && ln -s /etc/php/7.1/mods-available/swoole.ini /etc/php/7.1/cli/conf.d/swoole.ini \
-    && ln -s /etc/php/7.1/mods-available/swoole.ini /etc/php/7.1/fpm/conf.d/swoole.ini \
     && mkdir -p /var/log/supervisor \
     && apt-get autoclean \
     && apt-get autoremove \
