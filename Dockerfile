@@ -13,6 +13,16 @@ RUN apt-get update -y \
     re2c \
     tzdata \
     curl \
+    autoconf \
+    automake \
+    libtool \
+    flex \
+    libxml2-dev \
+    libssl-dev \
+    libcurl4-openssl-dev \
+    libjpeg-dev \
+    libpng12-dev \
+    libfreetype6-dev \
     bison \
     nginx-full \
     php-pear \
@@ -94,7 +104,7 @@ RUN apt-get update -y \
     && apt-get autoremove \
     && rm -rf /var/lib/apt/lists/* \
     && useradd admin \
-    && echo 'root:pang123' | chpasswd \
+    && echo 'root:lims123' | chpasswd \
     && /etc/init.d/ssh restart \
     && cp /usr/share/zoneinfo/Asia/Shanghai /etc/localtime \
     && echo 'Asia/Shanghai' > /etc/timezone \
