@@ -66,23 +66,6 @@ RUN apt-get update -y \
     && curl -sS https://getcomposer.org/installer | php \
     && mv composer.phar /usr/local/bin/composer \
     && cd /home && rm -rf temp && mkdir temp && cd temp \
-    && wget https://github.com/phalcon/cphalcon/archive/v3.3.2.tar.gz \
-    && tar -zxvf v3.3.2.tar.gz \
-    && cd cphalcon-3.3.2/build \
-    && sudo ./install \
-    && echo extension=phalcon.so >> /etc/php/7.2/mods-available/phalcon.ini \
-    && ln -s /etc/php/7.2/mods-available/phalcon.ini /etc/php/7.2/cli/conf.d/phalcon.ini \
-    && ln -s /etc/php/7.2/mods-available/phalcon.ini /etc/php/7.2/fpm/conf.d/phalcon.ini \
-    && mkdir -p /var/log/supervisor \
-    && apt-get autoclean \
-    && apt-get autoremove \
-    && rm -rf /var/lib/apt/lists/* \
-    && useradd admin \
-    && echo 'root:pang123' | chpasswd \
-    && /etc/init.d/ssh restart \
-    && cp /usr/share/zoneinfo/Asia/Shanghai /etc/localtime \
-    && echo 'Asia/Shanghai' > /etc/timezone \
-    && mkdir -p /var/www/app \
     && wget https://github.com/swoole/swoole-src/archive/v4.2.5.tar.gz \
 	https://github.com/redis/hiredis/archive/v0.13.3.tar.gz \
 	https://github.com/phpredis/phpredis/archive/3.1.3.tar.gz \
@@ -104,7 +87,17 @@ RUN apt-get update -y \
 	&& cd /home/temp/phpredis-3.1.3 \
 	&& phpize \
 	&& ./configure --enable-redis-igbinary \
-	&& make &&  make install
+	&& make &&  make install \
+    && mkdir -p /var/log/supervisor \
+    && apt-get autoclean \
+    && apt-get autoremove \
+    && rm -rf /var/lib/apt/lists/* \
+    && useradd admin \
+    && echo 'root:pang123' | chpasswd \
+    && /etc/init.d/ssh restart \
+    && cp /usr/share/zoneinfo/Asia/Shanghai /etc/localtime \
+    && echo 'Asia/Shanghai' > /etc/timezone \
+    && mkdir -p /var/www/app
     
 COPY src/info.php /var/www/app/info.php
 COPY build/.bashrc /root/.bashrc
