@@ -66,6 +66,10 @@ RUN apt-get update -y \
     && curl -sS https://getcomposer.org/installer | php \
     && mv composer.phar /usr/local/bin/composer \
     && cd /home && rm -rf temp && mkdir temp && cd temp \
+    && wget https://sourceforge.net/projects/re2c/files/0.16/re2c-0.16.tar.gz \
+    && tar zxf re2c-0.16.tar.gz && cd re2c-0.16 \
+    && ./configure \
+    && make && make install \
     && wget https://github.com/swoole/swoole-src/archive/v4.2.5.tar.gz \
 	https://github.com/redis/hiredis/archive/v0.13.3.tar.gz \
 	https://github.com/phpredis/phpredis/archive/3.1.3.tar.gz \
