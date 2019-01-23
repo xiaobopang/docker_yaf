@@ -94,8 +94,9 @@ RUN apt-get update -y \
     && ./configure --enable-redis-igbinary \
     && make &&  make install \
 	&& cd /home/temp/swoole-src-4.2.12 \
-	&& phpize && ./configure --enable-async-redis  --enable-openssl --enable-mysqlnd && make \
-	&& make install \
+	&& phpize && ./configure --enable-async-redis  --enable-openssl --enable-mysqlnd \
+	&& make -j$(nproc) \ 
+    && make install \
     && echo extension=swoole.so >> /etc/php/7.1/mods-available/swoole.ini \
     && ln -s /etc/php/7.1/mods-available/swoole.ini /etc/php/7.1/cli/conf.d/swoole.ini \
     && ln -s /etc/php/7.1/mods-available/swoole.ini /etc/php/7.1/fpm/conf.d/swoole.ini \
