@@ -39,7 +39,7 @@ services:
             - /Users/xiaobopang/Downloads/personal/docker/lims:/var/www/app
         ports: 
             - "9091:80"
-            - "9701:9703"
-            - "9702:9703"
+            - "9701:9701"
+            - "9702:9702"
             - "9703:9703"
             - "20122:22"
