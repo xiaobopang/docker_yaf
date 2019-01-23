@@ -28,19 +28,18 @@ services:
             - "6380:6379"
     lims:
         container_name: lims
-        image: registry.cn-hangzhou.aliyuncs.com/pangxiaobo/php7_nginx:v1
+        image: registry.cn-hangzhou.aliyuncs.com/pangxiaobo/lims:v1
         restart: always
         privileged: true
         links:
-            - mysql
-            - redis
+            - lims_mysql
+            - lims_redis
         volumes:
             #- /home/docker_user/pang:/home
             - /Users/xiaobopang/Downloads/personal/docker/lims:/var/www/app
         ports: 
-            - "8081:80"
+            - "9091:80"
             - "9701:9703"
             - "9702:9703"
             - "9703:9703"
-            - "10443:443"
-            - "10122:22"
+            - "20122:22"

@@ -88,6 +88,7 @@ RUN apt-get update -y \
     && pecl install inotify \
     && pecl install ds \
     && pecl install yaf \
+    && pecl install swoole \
     && mkdir -p /var/log/supervisor \
     && apt-get autoclean \
     && apt-get autoremove \
