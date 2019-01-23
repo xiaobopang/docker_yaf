@@ -87,7 +87,6 @@ RUN apt-get update -y \
     && ln -s /etc/php/7.1/mods-available/phalcon.ini /etc/php/7.1/fpm/conf.d/phalcon.ini \
     && pecl install inotify \
     && pecl install ds \
-    && pecl install igbinary \
     && pecl install yaf \
     && mkdir -p /var/log/supervisor \
     && apt-get autoclean \
