@@ -1,38 +1,33 @@
 version: "3"
 services:
-    # MySQL 5.7: https://hub.docker.com/_/mysql/
-    mysql:
-        container_name: mysql
-        image: mysql:5.7
+    lims_mysql:
+        container_name: lims_mysql
+        image: mysql:8.0
         command: mysqld --sql_mode="STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION"
         restart: always
         privileged: true
         environment:
-            MYSQL_ROOT_PASSWORD: "pang123"
+            MYSQL_ROOT_PASSWORD: "lims_mysql"
             MYSQL_USER: "root"
-            MYSQL_PASSWORD: "pang123"
-            #MYSQL_DATABASE: "test"
+            MYSQL_PASSWORD: "lims_mysql"
+            MYSQL_DATABASE: "lims_hk"
         volumes:
             #- /home/docker/mysql:/var/lib/mysql
-            - /Users/xiaobopang/Downloads/personal/docker/mysql:/var/lib/mysql
+            - /Users/xiaobopang/Downloads/personal/docker/lims_mysql:/var/lib/mysql
         ports:
-            - "13306:3306"
-
-    # Redis 3.2.10: https://hub.docker.com/_/redis/
-    redis:
-        container_name: redis
-        image: redis:3.2.10
-        command: redis-server --requirepass pang123
+            - "3307:3306"
+    lims_redis:
+        container_name: lims_redis
+        image: redis:5.0
+        command: redis-server --requirepass lims_redis
         restart: always
         privileged: true
         volumes:
-            - /Users/xiaobopang/Downloads/personal/docker/redis:/data
+            - /Users/xiaobopang/Downloads/personal/docker/lims_redis:/data
         ports:
-            - "16379:6379"
-
-    #内网 registry-internal.cn-hangzhou.aliyuncs.com/pangxiaobo/php7_nginx:v1
-    phalcon:
-        container_name: phalcon
+            - "6380:6379"
+    lims:
+        container_name: lims
         image: registry.cn-hangzhou.aliyuncs.com/pangxiaobo/php7_nginx:v1
         restart: always
         privileged: true
@@ -41,13 +36,11 @@ services:
             - redis
         volumes:
             #- /home/docker_user/pang:/home
-            - /Users/xiaobopang/Downloads/personal/docker/phalcon:/var/www/app
+            - /Users/xiaobopang/Downloads/personal/docker/lims:/home/lims
         ports: 
             - "8081:80"
-            - "8082:8082"
-            - "8083:8083"
-            - "8084:8084"
-            - "8085:8085"
-            - "8086:8086"
+            - "9701:9703"
+            - "9702:9703"
+            - "9703:9703"
             - "10443:443"
             - "10122:22"
