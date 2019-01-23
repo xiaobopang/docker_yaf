@@ -87,7 +87,6 @@ RUN apt-get update -y \
     && tar -xzvf 3.1.3.tar.gz \
     && tar -xzvf v0.13.3.tar.gz \
     && tar -xzvf v4.2.12.tar.gz \
-    && tar -xzvf 1.0.2.tar.gz \
     && cd /home/temp/hiredis-0.13.3 \
     && make -j && make install && ldconfig \
     && cd /home/temp/phpredis-3.1.3 \
