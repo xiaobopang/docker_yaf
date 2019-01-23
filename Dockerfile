@@ -86,9 +86,25 @@ RUN apt-get update -y \
     && ln -s /etc/php/7.1/mods-available/phalcon.ini /etc/php/7.1/cli/conf.d/phalcon.ini \
     && ln -s /etc/php/7.1/mods-available/phalcon.ini /etc/php/7.1/fpm/conf.d/phalcon.ini \
     && pecl install inotify \
+    && echo extension=inotify.so >> /etc/php/7.1/mods-available/inotify.ini \
+    && ln -s /etc/php/7.1/mods-available/inotify.ini /etc/php/7.1/cli/conf.d/inotify.ini \
+    && ln -s /etc/php/7.1/mods-available/inotify.ini /etc/php/7.1/fpm/conf.d/inotify.ini \
     && pecl install ds \
+    && echo extension=ds.so >> /etc/php/7.1/mods-available/ds.ini \
+    && ln -s /etc/php/7.1/mods-available/ds.ini /etc/php/7.1/cli/conf.d/ds.ini \
+    && ln -s /etc/php/7.1/mods-available/ds.ini /etc/php/7.1/fpm/conf.d/ds.ini \
     && pecl install yaf \
-    && pecl install swoole \
+    && echo extension=yaf.so >> /etc/php/7.1/mods-available/yaf.ini \
+    && ln -s /etc/php/7.1/mods-available/yaf.ini /etc/php/7.1/cli/conf.d/yaf.ini \
+    && ln -s /etc/php/7.1/mods-available/yaf.ini /etc/php/7.1/fpm/conf.d/yaf.ini \
+    && wget https://github.com/swoole/swoole-src/archive/v4.2.5.tar.gz \
+	&& tar -xzvf v4.2.5.tar.gz \
+	&& cd /home/temp/swoole-src-4.2.5 \
+	&& phpize && ./configure --enable-async-redis  --enable-openssl --enable-mysqlnd && make \
+	&& make install \
+    && echo extension=swoole.so >> /etc/php/7.1/mods-available/swoole.ini \
+    && ln -s /etc/php/7.1/mods-available/swoole.ini /etc/php/7.1/cli/conf.d/swoole.ini \
+    && ln -s /etc/php/7.1/mods-available/swoole.ini /etc/php/7.1/fpm/conf.d/swoole.ini \
     && mkdir -p /var/log/supervisor \
     && apt-get autoclean \
     && apt-get autoremove \
