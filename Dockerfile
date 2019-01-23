@@ -67,10 +67,6 @@ RUN apt-get update -y \
     --no-install-recommends \
     && curl -sS https://getcomposer.org/installer | php \
     && mv composer.phar /usr/local/bin/composer \
-    && pecl install igbinary \
-    && echo extension=igbinary.so >> /etc/php/7.1/mods-available/igbinary.ini \
-    && ln -s /etc/php/7.1/mods-available/igbinary.ini /etc/php/7.1/cli/conf.d/igbinary.ini \
-    && ln -s /etc/php/7.1/mods-available/igbinary.ini /etc/php/7.1/fpm/conf.d/igbinary.ini \
     && pecl install inotify \
     && echo extension=inotify.so >> /etc/php/7.1/mods-available/inotify.ini \
     && ln -s /etc/php/7.1/mods-available/inotify.ini /etc/php/7.1/cli/conf.d/inotify.ini \
@@ -87,9 +83,15 @@ RUN apt-get update -y \
     && wget https://github.com/redis/hiredis/archive/v0.13.3.tar.gz \
     https://github.com/phpredis/phpredis/archive/3.1.3.tar.gz \
     https://github.com/swoole/swoole-src/archive/v4.2.12.tar.gz \
+    https://github.com/phadej/igbinary/archive/1.0.2.tar.gz \
     && tar -xzvf 3.1.3.tar.gz \
     && tar -xzvf v0.13.3.tar.gz \
     && tar -xzvf v4.2.12.tar.gz \
+    && tar -xzvf 1.0.2.tar.gz \
+    && cd /home/temp/igbinary-1.0.2 \
+    && phpize \
+    && ./configure CFLAGS="-O2 -g" --enable-igbinary \
+    && make && make install \
     && cd /home/temp/hiredis-0.13.3 \
     && make -j && make install && ldconfig \
     && cd /home/temp/phpredis-3.1.3 \
@@ -109,6 +111,9 @@ RUN apt-get update -y \
     && echo extension=phalcon.so >> /etc/php/7.1/mods-available/phalcon.ini \
     && ln -s /etc/php/7.1/mods-available/phalcon.ini /etc/php/7.1/cli/conf.d/phalcon.ini \
     && ln -s /etc/php/7.1/mods-available/phalcon.ini /etc/php/7.1/fpm/conf.d/phalcon.ini \
+    && echo extension=igbinary.so >> /etc/php/7.1/mods-available/igbinary.ini \
+    && ln -s /etc/php/7.1/mods-available/igbinary.ini /etc/php/7.1/cli/conf.d/igbinary.ini \
+    && ln -s /etc/php/7.1/mods-available/igbinary.ini /etc/php/7.1/fpm/conf.d/igbinary.ini \
     && mkdir -p /var/log/supervisor \
     && apt-get autoclean \
     && apt-get autoremove \
