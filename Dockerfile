@@ -20,6 +20,7 @@ RUN apt-get update -y \
     php7.1-fpm \
     php7.1-cgi \
     php7.1-bz2 \
+    php7.1-igbinary \
     php7.1-bcmath \
     php7.1-calendar \
     php7.1-cli \
@@ -88,10 +89,6 @@ RUN apt-get update -y \
     && tar -xzvf v0.13.3.tar.gz \
     && tar -xzvf v4.2.12.tar.gz \
     && tar -xzvf 1.0.2.tar.gz \
-    && cd /home/temp/igbinary-1.0.2 \
-    && phpize \
-    && ./configure CFLAGS="-O2 -g" --enable-igbinary \
-    && make && make install \
     && cd /home/temp/hiredis-0.13.3 \
     && make -j && make install && ldconfig \
     && cd /home/temp/phpredis-3.1.3 \
@@ -111,9 +108,6 @@ RUN apt-get update -y \
     && echo extension=phalcon.so >> /etc/php/7.1/mods-available/phalcon.ini \
     && ln -s /etc/php/7.1/mods-available/phalcon.ini /etc/php/7.1/cli/conf.d/phalcon.ini \
     && ln -s /etc/php/7.1/mods-available/phalcon.ini /etc/php/7.1/fpm/conf.d/phalcon.ini \
-    && echo extension=igbinary.so >> /etc/php/7.1/mods-available/igbinary.ini \
-    && ln -s /etc/php/7.1/mods-available/igbinary.ini /etc/php/7.1/cli/conf.d/igbinary.ini \
-    && ln -s /etc/php/7.1/mods-available/igbinary.ini /etc/php/7.1/fpm/conf.d/igbinary.ini \
     && mkdir -p /var/log/supervisor \
     && apt-get autoclean \
     && apt-get autoremove \
