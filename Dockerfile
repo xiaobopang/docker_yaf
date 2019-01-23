@@ -77,15 +77,15 @@ RUN apt-get update -y \
     && curl -sS https://getcomposer.org/installer | php \
     && mv composer.phar /usr/local/bin/composer \
     && cd /home && rm -rf temp && mkdir temp && cd temp \
-    && wget https://github.com/swoole/swoole-src/archive/v4.2.5.tar.gz \
+    && wget https://github.com/swoole/swoole-src/archive/v4.2.12.tar.gz \
 	https://github.com/redis/hiredis/archive/v0.13.3.tar.gz \
 	https://github.com/phpredis/phpredis/archive/3.1.3.tar.gz \
 	&& tar -xzvf 3.1.3.tar.gz \
 	&& tar -xzvf v0.13.3.tar.gz \
-	&& tar -xzvf v4.2.5.tar.gz \
+	&& tar -xzvf v4.2.12.tar.gz \
 	&& cd /home/temp/hiredis-0.13.3 \
 	&& make -j && make install && ldconfig \
-	&& cd /home/temp/swoole-src-4.2.5 \
+	&& cd /home/temp/swoole-src-4.2.12 \
 	&& phpize && ./configure --enable-async-redis  --enable-openssl --enable-mysqlnd && make \
 	&& make install \
     && echo extension=swoole.so >> /etc/php/7.2/mods-available/swoole.ini \
