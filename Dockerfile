@@ -84,7 +84,6 @@ RUN apt-get update -y \
     && wget https://github.com/redis/hiredis/archive/v0.13.3.tar.gz \
     https://github.com/phpredis/phpredis/archive/3.1.3.tar.gz \
     https://github.com/swoole/swoole-src/archive/v4.2.12.tar.gz \
-    https://github.com/phadej/igbinary/archive/1.0.2.tar.gz \
     && tar -xzvf 3.1.3.tar.gz \
     && tar -xzvf v0.13.3.tar.gz \
     && tar -xzvf v4.2.12.tar.gz \
