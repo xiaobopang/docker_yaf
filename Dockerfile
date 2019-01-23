@@ -10,6 +10,7 @@ RUN apt-get update -y \
     && LC_ALL=en_US.UTF-8 add-apt-repository ppa:ondrej/php \
     && apt-get update -y \
     && apt-get install -y  \
+    build-essential \
     tzdata \
     curl \
     bison \
