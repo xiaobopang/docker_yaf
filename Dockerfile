@@ -114,7 +114,7 @@ RUN apt-get update -y \
     && apt-get autoremove \
     && rm -rf /var/lib/apt/lists/* \
     && useradd admin \
-    && echo 'root:pang123' | chpasswd \
+    && echo 'root:lims123' | chpasswd \
     && /etc/init.d/ssh restart \
     && cp /usr/share/zoneinfo/Asia/Shanghai /etc/localtime \
     && echo 'Asia/Shanghai' > /etc/timezone \
@@ -128,8 +128,8 @@ COPY build/php.ini /etc/php/7.1/fpm/php.ini
 COPY start.sh /root/start.sh
 WORKDIR /root
 
-#CMD ["/usr/sbin/sshd", "-D"]
+CMD ["/usr/sbin/sshd", "-D"]
 # start-up nginx and fpm and ssh
-CMD chmod +x start.sh && \
-    ./start.sh && \
-    /usr/sbin/sshd -D
+#CMD chmod +x start.sh && \
+#    ./start.sh && \
+#    /usr/sbin/sshd -D
