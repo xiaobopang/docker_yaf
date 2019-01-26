@@ -2,15 +2,14 @@ FROM ubuntu:16.04
 
 MAINTAINER  pangxiaobo <10846295@qq.com>
 
-COPY sshd_config /etc/ssh/
-
 RUN apt-get update -y \
-    && apt-get install -y language-pack-en-base \
+    && apt-get install -y language-pack-en-base python-software-properties \
     && apt-get install -y software-properties-common \
     && LC_ALL=en_US.UTF-8 add-apt-repository ppa:ondrej/php \
     && apt-get update -y \
     && apt-get install -y  \
     g++ \
+    gnutls-bin \
     build-essential \
     tzdata \
     curl \
@@ -29,7 +28,6 @@ RUN apt-get update -y \
     php7.2-ctype \
     php7.2-curl \
     php7.2-dev \
-    php7.2-geoip \
     php7.2-gettext \
     php7.2-gd \
     php7.2-intl \
@@ -44,8 +42,8 @@ RUN apt-get update -y \
     php7.2-sqlite3 \
     php7.2-ssh2 \
     php7.2-zip \
-    php7.2-xmlrpc \
-    php7.2-xsl \
+    php7.2-json \
+    php7.2-xml \
     zlib1g-dev \
     vim \
     libssl-dev \
@@ -117,12 +115,14 @@ RUN apt-get update -y \
     && echo 'Asia/Shanghai' > /etc/timezone \
     && mkdir -p /var/www/app
 
+COPY sshd_config /etc/ssh/
 COPY src/info.php /var/www/app/info.php
 COPY build/.bashrc /root/.bashrc
 COPY build/nginx.conf /etc/nginx/sites-enabled/default
 COPY build/app.conf /etc/nginx/conf.d/app.conf
 COPY build/php.ini /etc/php/7.2/fpm/php.ini
 COPY start.sh /root/start.sh
+
 #WORKDIR /root
 
 CMD ["/usr/sbin/sshd", "-D"]
