@@ -12,8 +12,7 @@ services:
             MYSQL_PASSWORD: "lims_mysql"
             MYSQL_DATABASE: "lims_hk"
         volumes:
-            #- /home/docker/mysql:/var/lib/mysql
-            - /Users/xiaobopang/Downloads/personal/docker/lims_mysql:/var/lib/mysql
+            - /home/docker/lims_mysql:/var/lib/mysql
         ports:
             - "3307:3306"
     lims_redis:
@@ -23,7 +22,7 @@ services:
         restart: always
         privileged: true
         volumes:
-            - /Users/xiaobopang/Downloads/personal/docker/lims_redis:/data
+            - /home/docker/lims_redis:/data
         ports:
             - "6380:6379"
     lims:
@@ -35,10 +34,9 @@ services:
             - lims_mysql
             - lims_redis
         volumes:
-            #- /home/docker_user/pang:/home
-            - /Users/xiaobopang/Downloads/personal/docker/lims:/var/www/app
+            - /home/docker/lims_nginx:/var/www/app
         ports: 
-            - "9091:80"
+            - "9800:80"
             - "9701:9701"
             - "9702:9702"
             - "9703:9703"
