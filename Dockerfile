@@ -3,8 +3,8 @@ FROM ubuntu:16.04
 MAINTAINER  pangxiaobo <10846295@qq.com>
 
 RUN apt-get update -y \
-    && apt-get install -y language-pack-en-base python-software-properties \
-    && apt-get install -y software-properties-common \
+    && apt-get install -y language-pack-en-base \
+    && apt-get install -y software-properties-common python-software-properties \
     && LC_ALL=en_US.UTF-8 add-apt-repository ppa:ondrej/php \
     && apt-get update -y \
     && apt-get install -y  \
