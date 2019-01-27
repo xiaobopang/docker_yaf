@@ -2,6 +2,8 @@ FROM ubuntu:16.04
 
 MAINTAINER  pangxiaobo <10846295@qq.com>
 
+ENV DEBIAN_FRONTEND noninteractive
+
 RUN apt-get update -y \
     && apt-get install -y language-pack-en-base \
     && apt-get install -y software-properties-common python-software-properties \

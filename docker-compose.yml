@@ -2,7 +2,7 @@ version: "3"
 services:
     lims_mysql:
         container_name: lims_mysql
-        image: mysql:5.7
+        image: mysql:5.7.25
         command: mysqld --sql_mode="STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION"
         restart: always
         privileged: true
@@ -12,21 +12,23 @@ services:
             MYSQL_PASSWORD: "lims_mysql"
             MYSQL_DATABASE: "lims_hk"
         volumes:
-            - /home/docker/lims_mysql:/var/lib/mysql
+            #- /home/docker/lims_mysql:/var/lib/mysql
+            - /Users/xiaobopang/Downloads/personal/docker/lims_mysql:/var/lib/mysql
         ports:
             - "3307:3306"
     lims_redis:
         container_name: lims_redis
-        image: redis:3.2
+        image: redis:5.0.3
         command: redis-server --requirepass lims_redis
         restart: always
         privileged: true
         volumes:
-            - /home/docker/lims_redis:/data
+            #- /home/docker/lims_redis:/data
+            - /Users/xiaobopang/Downloads/personal/docker/lims_redis:/data
         ports:
             - "6380:6379"
-    lims:
-        container_name: lims
+    lims_nginx:
+        container_name: lims_nginx
         image: registry.cn-hangzhou.aliyuncs.com/pangxiaobo/lims:v1
         restart: always
         privileged: true
@@ -34,7 +36,8 @@ services:
             - lims_mysql
             - lims_redis
         volumes:
-            - /home/docker/lims_nginx:/var/www/app
+            #- /home/docker/lims_nginx:/var/www/app
+            - /Users/xiaobopang/Downloads/personal/docker/lims_nginx:/var/www/app
         ports: 
             - "9800:80"
             - "9701:9701"
