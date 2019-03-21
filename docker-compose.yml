@@ -13,6 +13,13 @@ services:
             MYSQL_DATABASE: "test"
         volumes:
             - /home/docker/lims_mysql:/var/lib/mysql
+        resources:
+        limits:
+            cpus: "0.50"
+            memory: 1024M
+        reservations:
+            cpus: "0.25"
+            memory: 1024M
         ports:
             - "3307:3306"
     redis:
@@ -35,7 +42,7 @@ services:
             - redis
         volumes:
             - /home/docker/lims_nginx:/var/www/app
-        ports: 
+        ports:
             - "9800:80"
             - "9701:9701"
             - "9702:9702"
