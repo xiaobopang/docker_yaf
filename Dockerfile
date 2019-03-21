@@ -111,7 +111,7 @@ RUN apt-get update -y \
     && apt-get autoremove \
     && rm -rf /var/lib/apt/lists/* \
     && useradd admin \
-    && echo 'root:lims123' | chpasswd \
+    && echo 'root:test123' | chpasswd \
     && /etc/init.d/ssh restart \
     && cp /usr/share/zoneinfo/Asia/Shanghai /etc/localtime \
     && echo 'Asia/Shanghai' > /etc/timezone \
